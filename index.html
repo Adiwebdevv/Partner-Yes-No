@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Partner?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #ffe6f2;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      flex-direction: column;
+    }
+    .container {
+      background: #fff0fa;
+      padding: 2em 3em;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px #ffb3d6;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #ff69b4;
+      margin-bottom: 0.6em;
+      letter-spacing: 1px;
+    }
+    #message {
+      margin-bottom: 1.5em;
+      color: #d6336c;
+      font-size: 1.2em;
+      min-height: 2.5em;
+    }
+    .btn {
+      padding: 0.8em 2em;
+      font-size: 1.2em;
+      margin: 0 1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #yesBtn {
+      background: #ff69b4;
+      color: #fff;
+    }
+    #yesBtn:hover {
+      background: #d6336c;
+    }
+    #noBtn {
+      background: #fff;
+      color: #ff69b4;
+      border: 2px solid #ff69b4;
+    }
+    #noBtn:disabled {
+      background: #eee;
+      color: #bbb;
+      border: 2px solid #ccc;
+      cursor: not-allowed;
+    }
+    .heart {
+      font-size: 3em;
+      color: #ff69b4;
+      animation: heartbeat 1s infinite;
+      margin-bottom: 0.5em;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      10%, 30% { transform: scale(1.2); }
+      20%, 40% { transform: scale(1.1); }
+      50% { transform: scale(1.3); }
+      60%, 80% { transform: scale(1.1);}
+      70%, 90% { transform: scale(1.2);}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="heart">💖</div>
+    <h1>Will you be my partner?</h1>
+    <div id="message"></div>
+    <button class="btn" id="yesBtn">Yes</button>
+    <button class="btn" id="noBtn">No</button>
+  </div>
+  <script>
+    const messages = [
+      "Are you sure? 🥺",
+      "Please don't say no... 😢",
+      "My heart will break! 💔",
+      "Give me a chance, pretty please? 🥹",
+      "I brought flowers for you! 🌸",
+      "Last time... Will you say yes? 😭"
+    ];
+    let noClickCount = 0;
+
+    const messageDiv = document.getElementById('message');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+
+    yesBtn.addEventListener('click', () => {
+      messageDiv.innerHTML = "Yay! You made me the happiest person! 🥰💖";
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+      yesBtn.style.background = '#8fff8f';
+      yesBtn.style.color = '#333';
+      noBtn.style.background = '#eee';
+      noBtn.style.color = '#bbb';
+    });
+
+    noBtn.addEventListener('click', () => {
+      if (noClickCount < messages.length) {
+        messageDiv.innerHTML = messages[noClickCount];
+        noClickCount++;
+        if (noClickCount === messages.length) {
+          noBtn.disabled = true;
+          noBtn.style.background = '#eee';
+          noBtn.style.color = '#bbb';
+          messageDiv.innerHTML += "<br><b>No more 'No' left! Only 'Yes' can save me!</b>";
+        }
+      }
+    });
+
+    // Initial message
+    messageDiv.innerHTML = "Please choose wisely...";
+  </script>
+</body>
+</html>
